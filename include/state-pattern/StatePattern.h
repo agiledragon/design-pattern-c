@@ -6,18 +6,20 @@ struct Water;
 typedef struct State
 {
     void (*init)(struct State* self);
-    char* name;
-    char* (*getName)(struct State* self);
+
+    const char* (*getName)(struct State* self);
     int (*match)(struct State* self, int temperature);
     void (*handle)(struct State* self, struct Water* water);
+
+    const char* name;
 }State;
 
 #define INHERITED_FROM_STATE \
         void (*init)(struct State* self);\
-        char* name;\
-        char* (*getName)(struct State* self);\
+        const char* (*getName)(struct State* self);\
         int (*match)(struct State* self, int temperature);\
-        void (*handle)(struct State* self, struct Water* water);
+        void (*handle)(struct State* self, struct Water* water);\
+        char* name;
 
 typedef struct SolidState
 {
@@ -37,14 +39,16 @@ typedef struct GaseousState
 typedef struct Water
 {
     void (*init)(struct Water* self, int temperature);
-    State* states[3];
-    int temperature;
-    State* currentState;
+
     int (*getTemperature)(struct Water* self);
     void (*riseTemperature)(struct Water* self, int step);
     void (*changeState)(struct Water* self);
     void (*reduceTemperature)(struct Water* self, int step);
     void (*behavior)(struct Water* self);
+
+    State* states[3];
+    int temperature;
+    State* currentState;
 } Water;
 
 

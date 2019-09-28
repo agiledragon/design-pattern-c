@@ -7,7 +7,7 @@ void waterRiseTemperature(Water* self, int step);
 void waterReduceTemperature(Water* self, int step);
 void waterChangeState(Water* self);
 void waterBehavior(Water* self);
-char* stateGetName(State* state);
+const char* stateGetName(State* state);
 void solidStateInit(State* self);
 int solidStateMatch(State* self, int temperature);
 void solidStateHandle(State* self, Water* water);
@@ -89,7 +89,7 @@ void waterBehavior(Water* self)
     self->currentState->handle(self->currentState, self);
 }
 
-char* stateGetName(State* state)
+const char* stateGetName(State* state)
 {
     return state->name;
 }
