@@ -42,15 +42,16 @@ typedef struct Water
 
     int (*getTemperature)(struct Water* self);
     void (*riseTemperature)(struct Water* self, int step);
-    void (*changeState)(struct Water* self);
     void (*reduceTemperature)(struct Water* self, int step);
     void (*behavior)(struct Water* self);
+
+    void (*changeState)(struct Water* self);
 
     State* states[3];
     int temperature;
     State* currentState;
 } Water;
 
-
+void waterInit(Water* self, int temperature);
 
 #endif

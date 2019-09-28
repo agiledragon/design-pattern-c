@@ -1,9 +1,8 @@
 #include <stdio.h>
+#include "Client.h"
 
-extern void statePatternRun();
-
-int main()
+int main(int argc,char* argv[])
 {
-    statePatternRun();
+    designPatternRun(argv[1]);
     return 0;
 }

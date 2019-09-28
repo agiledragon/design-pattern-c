@@ -1,7 +1,6 @@
 #include "state-pattern/StatePattern.h"
 #include <stdio.h>
 
-void waterInit(Water* self, int temperature);
 int waterGetTemperature(Water* self);
 void waterRiseTemperature(Water* self, int step);
 void waterReduceTemperature(Water* self, int step);
@@ -17,21 +16,6 @@ void liquidStateHandle(State* self, Water* water);
 void gaseousStateInit(State* self);
 int gaseousStateMatch(State* self, int temperature);
 void gaseousStateHandle(State* self, Water* water);
-
-
-void statePatternRun()
-{
-    Water water = {waterInit};
-    water.init(&water, 25);
-    water.behavior(&water);
-    water.riseTemperature(&water, 50);
-    water.behavior(&water);
-    water.reduceTemperature(&water, 100);
-    water.behavior(&water);
-    water.riseTemperature(&water, 200);
-    water.behavior(&water);
-}
-
 
 void waterInit(Water* self, int temperature)
 {
