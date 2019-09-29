@@ -1,5 +1,6 @@
-#ifndef HE48FCBEB_BF4E_4FDB_A359_5514BD1AA2E7
-#define HE48FCBEB_BF4E_4FDB_A359_5514BD1AA2E7
+#ifndef HFD8D9C8D_31C0_40B2_84CC_320E29DCACB5
+#define HFD8D9C8D_31C0_40B2_84CC_320E29DCACB5
+
 
 struct Water;
 
@@ -36,22 +37,15 @@ typedef struct GaseousState
     INHERITED_FROM_STATE
 }GaseousState;
 
-typedef struct Water
-{
-    void (*init)(struct Water* self, int temperature);
-
-    int (*getTemperature)(struct Water* self);
-    void (*riseTemperature)(struct Water* self, int step);
-    void (*reduceTemperature)(struct Water* self, int step);
-    void (*behavior)(struct Water* self);
-
-    void (*changeState)(struct Water* self);
-
-    State* states[3];
-    int temperature;
-    State* currentState;
-} Water;
-
-void waterInit(Water* self, int temperature);
+const char* stateGetName(State* state);
+void solidStateInit(State* self);
+int solidStateMatch(State* self, int temperature);
+void solidStateHandle(State* self, struct Water* water);
+void liquidStateInit(State* self);
+int liquidStateMatch(State* self, int temperature);
+void liquidStateHandle(State* self, struct Water* water);
+void gaseousStateInit(State* self);
+int gaseousStateMatch(State* self, int temperature);
+void gaseousStateHandle(State* self, struct Water* water);
 
 #endif

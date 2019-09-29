@@ -1,16 +1,5 @@
-#include "Client.h"
-#include "state-pattern/StatePattern.h"
-#include <string.h>
-
-void statePatternRun();
-
-void designPatternRun(const char* patternName)
-{
-    if (strcmp(patternName, "state-pattern"))
-    {
-        statePatternRun();
-    }
-}
+#include "state-pattern/Client.h"
+#include "state-pattern/Water.h"
 
 void statePatternRun()
 {
@@ -24,3 +13,4 @@ void statePatternRun()
     water.riseTemperature(&water, 200);
     water.behavior(&water);
 }
+

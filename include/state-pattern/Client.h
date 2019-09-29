@@ -1,0 +1,6 @@
+#ifndef HE48FCBEB_BF4E_4FDB_A359_5514BD1AA2E7
+#define HE48FCBEB_BF4E_4FDB_A359_5514BD1AA2E7
+
+void statePatternRun();
+
+#endif
