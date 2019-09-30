@@ -1,6 +1,7 @@
 #ifndef HFD8D9C8D_31C0_40B2_84CC_320E29DCACB5
 #define HFD8D9C8D_31C0_40B2_84CC_320E29DCACB5
 
+#include "pub/Keywords.h"
 
 struct Water;
 
@@ -8,18 +9,18 @@ typedef struct State
 {
     void (*init)(struct State* self);
 
+    ABSTRACT(void (*handle)(struct State* self, struct Water* water));
+    ABSTRACT(int (*match)(struct State* self, int temperature));
     const char* (*getName)(struct State* self);
-    int (*match)(struct State* self, int temperature);
-    void (*handle)(struct State* self, struct Water* water);
 
     const char* name;
 }State;
 
 #define INHERITED_FROM_STATE \
         void (*init)(struct State* self);\
+        OVERRIDE(void (*handle)(struct State* self, struct Water* water));\
+        OVERRIDE(int (*match)(struct State* self, int temperature));\
         const char* (*getName)(struct State* self);\
-        int (*match)(struct State* self, int temperature);\
-        void (*handle)(struct State* self, struct Water* water);\
         char* name;
 
 typedef struct SolidState

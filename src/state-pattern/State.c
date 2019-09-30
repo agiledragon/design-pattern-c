@@ -1,5 +1,6 @@
 #include "state-pattern/State.h"
 #include "state-pattern/Water.h"
+#include <stdio.h>
 
 const char* stateGetName(State* state)
 {

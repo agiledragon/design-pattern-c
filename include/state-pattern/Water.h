@@ -15,8 +15,8 @@ typedef struct Water
     void (*changeState)(struct Water* self);
 
     struct State* states[3];
-    int temperature;
     struct State* currentState;
+    int temperature;
 } Water;
 
 void waterInit(Water* self, int temperature);
