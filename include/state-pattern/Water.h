@@ -15,7 +15,6 @@ typedef struct Water
     struct State* states[MAX_STATE_NUM];
     struct State* currentState;
     int temperature;
-
 } Water;
 
 Water* newWater(int temperature);

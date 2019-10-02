@@ -1,17 +1,16 @@
 #include "state-pattern/State.h"
 #include "state-pattern/Water.h"
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
 
 const char* stateGetName(State* state);
-void solidStateInit(State* self);
+void solidStateInit(SolidState* self);
 Boolean solidStateMatch(State* self, int temperature);
 void solidStateHandle(State* self, struct Water* water);
-void liquidStateInit(State* self);
+void liquidStateInit(LiquidState* self);
 Boolean liquidStateMatch(State* self, int temperature);
 void liquidStateHandle(State* self, struct Water* water);
-void gaseousStateInit(State* self);
+void gaseousStateInit(GaseousState* self);
 Boolean gaseousStateMatch(State* self, int temperature);
 void gaseousStateHandle(State* self, struct Water* water);
 
@@ -24,7 +23,7 @@ State* newState(StateIdentifier identifier)
         state = (State*)malloc(sizeof(SolidState));
         if (state != NULL)
         {
-            solidStateInit(state);
+            solidStateInit((SolidState*)state);
         }
         break;
 
@@ -32,7 +31,7 @@ State* newState(StateIdentifier identifier)
         state = (State*)malloc(sizeof(LiquidState));
         if (state != NULL)
         {
-            liquidStateInit(state);
+            liquidStateInit((LiquidState*)state);
         }
         break;
 
@@ -40,7 +39,7 @@ State* newState(StateIdentifier identifier)
         state = (State*)malloc(sizeof(GaseousState));
         if (state != NULL)
         {
-            gaseousStateInit(state);
+            gaseousStateInit((GaseousState*)state);
         }
         break;
 
@@ -61,13 +60,12 @@ const char* stateGetName(State* state)
     return state->name;
 }
 
-void solidStateInit(State* self)
+void solidStateInit(SolidState* self)
 {
-    SolidState* state = (SolidState*)self;
-    state->name = "SolidState";
-    state->getName = stateGetName;
-    state->match = solidStateMatch;
-    state->handle = solidStateHandle;
+    self->name = "SolidState";
+    self->getName = stateGetName;
+    self->match = solidStateMatch;
+    self->handle = solidStateHandle;
 }
 
 Boolean solidStateMatch(State* self, int temperature)
@@ -80,13 +78,12 @@ void solidStateHandle(State* self, Water* water)
     printf("我性格高冷，当前体温%d摄氏度，我坚如钢铁，仿如一冷血动物，请用我砸人……\n", water->getTemperature(water));
 }
 
-void liquidStateInit(State* self)
+void liquidStateInit(LiquidState* self)
 {
-    SolidState* state = (SolidState*)self;
-    state->name = "LiquidState";
-    state->getName = stateGetName;
-    state->match = liquidStateMatch;
-    state->handle = liquidStateHandle;
+    self->name = "LiquidState";
+    self->getName = stateGetName;
+    self->match = liquidStateMatch;
+    self->handle = liquidStateHandle;
 }
 
 Boolean liquidStateMatch(State* self, int temperature)
@@ -99,13 +96,12 @@ void liquidStateHandle(State* self, Water* water)
     printf("我性格温和，当前体温%d摄氏度，我可滋润万物，饮用我可让你活力倍增……\n", water->getTemperature(water));
 }
 
-void gaseousStateInit(State* self)
+void gaseousStateInit(GaseousState* self)
 {
-    SolidState* state = (SolidState*)self;
-    state->name = "GaseousState";
-    state->getName = stateGetName;
-    state->match = gaseousStateMatch;
-    state->handle = gaseousStateHandle;
+    self->name = "GaseousState";
+    self->getName = stateGetName;
+    self->match = gaseousStateMatch;
+    self->handle = gaseousStateHandle;
 }
 
 Boolean gaseousStateMatch(State* self, int temperature)
