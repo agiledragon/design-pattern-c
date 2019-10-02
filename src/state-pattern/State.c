@@ -16,7 +16,7 @@ void solidStateInit(State* self)
     state->handle = solidStateHandle;
 }
 
-int solidStateMatch(State* self, int temperature)
+boolean solidStateMatch(State* self, int temperature)
 {
     return temperature < 0;
 }
@@ -35,7 +35,7 @@ void liquidStateInit(State* self)
     state->handle = liquidStateHandle;
 }
 
-int liquidStateMatch(State* self, int temperature)
+boolean liquidStateMatch(State* self, int temperature)
 {
     return temperature >= 0 && temperature < 100;
 }
@@ -54,7 +54,7 @@ void gaseousStateInit(State* self)
     state->handle = gaseousStateHandle;
 }
 
-int gaseousStateMatch(State* self, int temperature)
+boolean gaseousStateMatch(State* self, int temperature)
 {
     return temperature > 100;
 }

@@ -6,14 +6,11 @@ struct State;
 typedef struct Water
 {
     void (*init)(struct Water* self, int temperature);
-
     int (*getTemperature)(struct Water* self);
     void (*riseTemperature)(struct Water* self, int step);
     void (*reduceTemperature)(struct Water* self, int step);
     void (*behavior)(struct Water* self);
-
     void (*changeState)(struct Water* self);
-
     struct State* states[3];
     struct State* currentState;
     int temperature;
