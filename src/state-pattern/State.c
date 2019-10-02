@@ -1,6 +1,60 @@
 #include "state-pattern/State.h"
 #include "state-pattern/Water.h"
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+const char* stateGetName(State* state);
+void solidStateInit(State* self);
+Boolean solidStateMatch(State* self, int temperature);
+void solidStateHandle(State* self, struct Water* water);
+void liquidStateInit(State* self);
+Boolean liquidStateMatch(State* self, int temperature);
+void liquidStateHandle(State* self, struct Water* water);
+void gaseousStateInit(State* self);
+Boolean gaseousStateMatch(State* self, int temperature);
+void gaseousStateHandle(State* self, struct Water* water);
+
+State* newState(StateIdentifier identifier)
+{
+    State* state = NULL;
+    switch(identifier)
+    {
+    case SOLID:
+        state = (State*)malloc(sizeof(SolidState));
+        if (state != NULL)
+        {
+            solidStateInit(state);
+        }
+        break;
+
+    case LIQUID:
+        state = (State*)malloc(sizeof(LiquidState));
+        if (state != NULL)
+        {
+            liquidStateInit(state);
+        }
+        break;
+
+    case GASEOUS:
+        state = (State*)malloc(sizeof(GaseousState));
+        if (state != NULL)
+        {
+            gaseousStateInit(state);
+        }
+        break;
+
+    default:
+        break;
+    }
+
+    return state;
+}
+
+void deleteState(State* state)
+{
+    free(state);
+}
 
 const char* stateGetName(State* state)
 {
@@ -16,7 +70,7 @@ void solidStateInit(State* self)
     state->handle = solidStateHandle;
 }
 
-boolean solidStateMatch(State* self, int temperature)
+Boolean solidStateMatch(State* self, int temperature)
 {
     return temperature < 0;
 }
@@ -35,7 +89,7 @@ void liquidStateInit(State* self)
     state->handle = liquidStateHandle;
 }
 
-boolean liquidStateMatch(State* self, int temperature)
+Boolean liquidStateMatch(State* self, int temperature)
 {
     return temperature >= 0 && temperature < 100;
 }
@@ -54,7 +108,7 @@ void gaseousStateInit(State* self)
     state->handle = gaseousStateHandle;
 }
 
-boolean gaseousStateMatch(State* self, int temperature)
+Boolean gaseousStateMatch(State* self, int temperature)
 {
     return temperature > 100;
 }
