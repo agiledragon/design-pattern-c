@@ -62,10 +62,10 @@ const char* stateGetName(State* state)
 
 void solidStateInit(SolidState* self)
 {
-    self->name = "SolidState";
-    self->getName = stateGetName;
-    self->match = solidStateMatch;
-    self->handle = solidStateHandle;
+    self->base.name = "SolidState";
+    self->base.getName = stateGetName;
+    self->base.match = solidStateMatch;
+    self->base.handle = solidStateHandle;
 }
 
 Boolean solidStateMatch(State* self, int temperature)
@@ -80,10 +80,10 @@ void solidStateHandle(State* self, Water* water)
 
 void liquidStateInit(LiquidState* self)
 {
-    self->name = "LiquidState";
-    self->getName = stateGetName;
-    self->match = liquidStateMatch;
-    self->handle = liquidStateHandle;
+    self->base.name = "LiquidState";
+    self->base.getName = stateGetName;
+    self->base.match = liquidStateMatch;
+    self->base.handle = liquidStateHandle;
 }
 
 Boolean liquidStateMatch(State* self, int temperature)
@@ -98,10 +98,10 @@ void liquidStateHandle(State* self, Water* water)
 
 void gaseousStateInit(GaseousState* self)
 {
-    self->name = "GaseousState";
-    self->getName = stateGetName;
-    self->match = gaseousStateMatch;
-    self->handle = gaseousStateHandle;
+    self->base.name = "GaseousState";
+    self->base.getName = stateGetName;
+    self->base.match = gaseousStateMatch;
+    self->base.handle = gaseousStateHandle;
 }
 
 Boolean gaseousStateMatch(State* self, int temperature)

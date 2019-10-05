@@ -6,32 +6,28 @@
 
 struct Water;
 
-#define STATE_MEMBER_DECL \
-        VIRTUAL(void (*handle)(struct State* self, struct Water* water));\
-        VIRTUAL(Boolean (*match)(struct State* self, int temperature));\
-        const char* (*getName)(struct State* self);\
-        char* name;
-
 typedef struct State
 {
-    STATE_MEMBER_DECL
+    VIRTUAL(void (*handle)(struct State* self, struct Water* water));
+    VIRTUAL(Boolean (*match)(struct State* self, int temperature));
+    const char* (*getName)(struct State* self);
+    char* name;
 }State;
 
-#define INHERITED_FROM_STATE STATE_MEMBER_DECL
 
 typedef struct SolidState
 {
-    INHERITED_FROM_STATE
+    State base;
 }SolidState;
 
 typedef struct LiquidState
 {
-    INHERITED_FROM_STATE
+    State base;
 }LiquidState;
 
 typedef struct GaseousState
 {
-    INHERITED_FROM_STATE
+    State base;
 }GaseousState;
 
 typedef enum
