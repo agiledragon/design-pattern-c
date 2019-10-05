@@ -3,6 +3,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define RET_CONCRETE_STATE(obj, T, init) \
+    obj = (State*)malloc(sizeof(T));\
+    if (obj != NULL)\
+    {\
+        init((T*)obj);\
+    }\
+    return obj
+
 const char* stateGetName(State* state);
 void solidStateInit(SolidState* self);
 Boolean solidStateMatch(State* self, int temperature);
@@ -20,34 +28,14 @@ State* newState(StateIdentifier identifier)
     switch(identifier)
     {
     case SOLID:
-        state = (State*)malloc(sizeof(SolidState));
-        if (state != NULL)
-        {
-            solidStateInit((SolidState*)state);
-        }
-        break;
-
+        RET_CONCRETE_STATE(state, SolidState, solidStateInit);
     case LIQUID:
-        state = (State*)malloc(sizeof(LiquidState));
-        if (state != NULL)
-        {
-            liquidStateInit((LiquidState*)state);
-        }
-        break;
-
+        RET_CONCRETE_STATE(state, LiquidState, liquidStateInit);
     case GASEOUS:
-        state = (State*)malloc(sizeof(GaseousState));
-        if (state != NULL)
-        {
-            gaseousStateInit((GaseousState*)state);
-        }
-        break;
-
+        RET_CONCRETE_STATE(state, GaseousState, gaseousStateInit);
     default:
-        break;
+        return NULL;
     }
-
-    return state;
 }
 
 void deleteState(State* state)
