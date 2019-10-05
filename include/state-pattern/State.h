@@ -8,12 +8,11 @@ struct Water;
 
 typedef struct State
 {
-    VIRTUAL(void (*handle)(struct State* self, struct Water* water));
-    VIRTUAL(Boolean (*match)(struct State* self, int temperature));
+    ABSTRACT(void (*handle)(struct State* self, struct Water* water));
+    ABSTRACT(Boolean (*match)(struct State* self, int temperature));
     const char* (*getName)(struct State* self);
     char* name;
 }State;
-
 
 typedef struct SolidState
 {

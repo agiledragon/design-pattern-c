@@ -2,7 +2,7 @@
 #define H97496898_6DB1_45F5_B914_507E6A1EC4DB
 
 
-#define VIRTUAL(x) x
+#define ABSTRACT(x) x
 
 
 #endif
