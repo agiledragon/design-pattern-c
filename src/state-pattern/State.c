@@ -12,6 +12,9 @@
     return obj
 
 const char* stateGetName(State* state);
+State* newSolidState();
+State* newLiquidState();
+State* newGaseousState();
 void solidStateInit(SolidState* self);
 Boolean solidStateMatch(State* self, int temperature);
 void solidStateHandle(State* self, struct Water* water);
@@ -24,23 +27,48 @@ void gaseousStateHandle(State* self, struct Water* water);
 
 State* newState(StateIdentifier identifier)
 {
-    State* state = NULL;
     switch(identifier)
     {
-    case SOLID:
-        RET_CONCRETE_STATE(state, SolidState, solidStateInit);
-    case LIQUID:
-        RET_CONCRETE_STATE(state, LiquidState, liquidStateInit);
-    case GASEOUS:
-        RET_CONCRETE_STATE(state, GaseousState, gaseousStateInit);
-    default:
-        return NULL;
+    case SOLID: return newSolidState();
+    case LIQUID: return newLiquidState();
+    case GASEOUS: return newGaseousState();
+    default: return NULL;
     }
 }
 
 void deleteState(State* state)
 {
     free(state);
+}
+
+State* newSolidState()
+{
+    State* state = (State*)malloc(sizeof(SolidState));
+    if (state != NULL)
+    {
+       solidStateInit((SolidState*)state);
+    }
+    return state;
+}
+
+State* newLiquidState()
+{
+    State* state = (State*)malloc(sizeof(LiquidState));
+    if (state != NULL)
+    {
+        liquidStateInit((LiquidState*)state);
+    }
+    return state;
+}
+
+State* newGaseousState()
+{
+    State* state = (State*)malloc(sizeof(GaseousState));
+    if (state != NULL)
+    {
+        gaseousStateInit((GaseousState*)state);
+    }
+    return state;
 }
 
 void stateInit(State* self,
