@@ -3,14 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define RET_CONCRETE_STATE(obj, T, init) \
-    obj = (State*)malloc(sizeof(T));\
-    if (obj != NULL)\
-    {\
-        init((T*)obj);\
-    }\
-    return obj
-
 const char* stateGetName(State* state);
 State* newSolidState();
 State* newLiquidState();
