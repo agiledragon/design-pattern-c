@@ -12,7 +12,7 @@ Build and run:
 The value of pattern-name:
 - state-pattern
 
-
+Related Chinese article：[C 语言的面向对象之旅](https://www.jianshu.com/p/9c351911df6a)
 
 
 
