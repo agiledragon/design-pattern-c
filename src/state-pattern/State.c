@@ -33,6 +33,17 @@ void deleteState(State* state)
     free(state);
 }
 
+void stateInit(State* self,
+        void (*handle)(struct State* self, struct Water* water),
+        Boolean (*match)(struct State* self, int temperature),
+        char* name)
+{
+    self->handle = handle;
+    self->match = match;
+    self->getName = stateGetName;
+    self->name = name;
+}
+
 State* newSolidState()
 {
     State* state = (State*)malloc(sizeof(SolidState));
@@ -61,17 +72,6 @@ State* newGaseousState()
         gaseousStateInit((GaseousState*)state);
     }
     return state;
-}
-
-void stateInit(State* self,
-        void (*handle)(struct State* self, struct Water* water),
-        Boolean (*match)(struct State* self, int temperature),
-        char* name)
-{
-    self->handle = handle;
-    self->match = match;
-    self->getName = stateGetName;
-    self->name = name;
 }
 
 const char* stateGetName(State* state)
