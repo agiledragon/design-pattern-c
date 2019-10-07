@@ -4,9 +4,9 @@
 #include <stdlib.h>
 
 const char* stateGetName(State* state);
-State* newSolidState();
-State* newLiquidState();
-State* newGaseousState();
+State* solidStateCreate();
+State* liquidStateCreate();
+State* gaseousStateCreate();
 void solidStateInit(SolidState* self);
 Boolean solidStateMatch(State* self, int temperature);
 void solidStateHandle(State* self, struct Water* water);
@@ -17,18 +17,18 @@ void gaseousStateInit(GaseousState* self);
 Boolean gaseousStateMatch(State* self, int temperature);
 void gaseousStateHandle(State* self, struct Water* water);
 
-State* newState(StateIdentifier identifier)
+State* stateCreate(StateIdentifier identifier)
 {
     switch(identifier)
     {
-    case SOLID: return newSolidState();
-    case LIQUID: return newLiquidState();
-    case GASEOUS: return newGaseousState();
+    case SOLID: return solidStateCreate();
+    case LIQUID: return liquidStateCreate();
+    case GASEOUS: return gaseousStateCreate();
     default: return NULL;
     }
 }
 
-void deleteState(State* state)
+void stateDestroy(State* state)
 {
     free(state);
 }
@@ -44,7 +44,7 @@ void stateInit(State* self,
     self->name = name;
 }
 
-State* newSolidState()
+State* solidStateCreate()
 {
     State* state = (State*)malloc(sizeof(SolidState));
     if (state != NULL)
@@ -54,7 +54,7 @@ State* newSolidState()
     return state;
 }
 
-State* newLiquidState()
+State* liquidStateCreate()
 {
     State* state = (State*)malloc(sizeof(LiquidState));
     if (state != NULL)
@@ -64,7 +64,7 @@ State* newLiquidState()
     return state;
 }
 
-State* newGaseousState()
+State* gaseousStateCreate()
 {
     State* state = (State*)malloc(sizeof(GaseousState));
     if (state != NULL)

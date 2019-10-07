@@ -4,7 +4,7 @@
 
 void statePatternRun()
 {
-    Water* water = newWater(25);
+    Water* water = waterCreate(25);
     if (water == NULL) return;
 
     water->behavior(water);
@@ -15,6 +15,6 @@ void statePatternRun()
     water->riseTemperature(water, 200);
     water->behavior(water);
 
-    deleteWater(water);
+    waterDestroy(water);
 }
 

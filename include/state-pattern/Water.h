@@ -17,7 +17,7 @@ typedef struct Water
     int temperature;
 } Water;
 
-Water* newWater(int temperature);
-void deleteWater(Water* water);
+Water* waterCreate(int temperature);
+void waterDestroy(Water* water);
 
 #endif

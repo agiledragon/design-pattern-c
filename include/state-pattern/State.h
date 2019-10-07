@@ -36,7 +36,7 @@ typedef enum
     GASEOUS
 }StateIdentifier;
 
-State* newState(StateIdentifier identifier);
-void deleteState(State* state);
+State* stateCreate(StateIdentifier identifier);
+void stateDestroy(State* state);
 
 #endif

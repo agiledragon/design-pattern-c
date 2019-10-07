@@ -13,7 +13,7 @@ void waterReduceTemperature(Water* self, int step);
 void waterChangeState(Water* self);
 void waterBehavior(Water* self);
 
-Water* newWater(int temperature)
+Water* waterCreate(int temperature)
 {
     Water* water = (Water*)malloc(sizeof(Water));
     if (water != NULL)
@@ -27,7 +27,7 @@ Water* newWater(int temperature)
     return water;
 }
 
-void deleteWater(Water* water)
+void waterDestroy(Water* water)
 {
     waterCleanUp(water);
     free(water);
@@ -35,9 +35,9 @@ void deleteWater(Water* water)
 
 ErrCode waterInit(Water* self, int temperature)
 {
-    self->states[0] = newState(SOLID);
-    self->states[1] = newState(LIQUID);
-    self->states[2] = newState(GASEOUS);
+    self->states[0] = stateCreate(SOLID);
+    self->states[1] = stateCreate(LIQUID);
+    self->states[2] = stateCreate(GASEOUS);
     for (int i = 0; i < MAX_STATE_NUM; i++)
     {
         if (self->states[i] == NULL)
@@ -59,7 +59,7 @@ void waterCleanUp(Water* self)
 {
     for (int i = 0; i < MAX_STATE_NUM; i++)
     {
-        deleteState(self->states[i]);
+        stateDestroy(self->states[i]);
         self->states[i] = NULL;
     }
     self->currentState = NULL;
